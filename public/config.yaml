@@ -1,0 +1,693 @@
+openapi: 3.0.0
+info:
+  title: Игроки и Видеоигры
+  version: 0.0.1
+servers:
+  - url: http://localhost:8000/
+    description: Dev server
+paths:
+  /players:
+    get:
+      summary: Метод получения списка игроков
+      tags:
+        - Players
+      operationId: getAllPlayers
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Players"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания игрока
+      tags:
+        - Players
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Player"
+      responses:
+         '200': 
+           description: OK
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Player"
+         '400': 
+           description:  Bad Request
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '401':
+           description: Unauthorized
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '403':
+           description: Forbidden
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '404':
+           description: Not found
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '500':
+           description: Interval Server Error
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"  
+          
+  /players/{player_id}:
+    get:
+      summary: Метод получения списка игроков
+      tags:
+        - Players
+      operationId: getPlayerById
+      parameters:
+        - name: player_id
+          in: path
+          required: true
+          description: Идентификатор игрока
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+          
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+      - "Players"
+      operationId: "playerPatch"
+      parameters:
+        - in: path
+          name: "player_id"
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: "name"
+          schema:
+            type: "string"
+        - in: query
+          name: "email"
+          schema:
+            type: "string"
+        - in: query
+          name: "password"
+          schema:
+            type: "string"
+        - in: query
+          name: "remember_token"
+          schema:
+            type: "string"
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - Players
+      summary: Метод обновления игрока по id
+      operationId: playerUpdate
+      parameters: 
+        - name: player_id
+          in: path
+          required: true
+          description: Идентификатор игрока
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    delete:
+      summary: Метод удаления игрока по идентификатору
+      tags:
+        - Players
+      operationId: deletePlayerById
+      parameters:
+        - name: player_id
+          in: path
+          required: true
+          description: Идентификатор игрока
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+      responses:
+        '200': 
+          description: Успешное удаление
+          content:
+            application/json: {}
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /games:
+    get:
+      summary: Метод получения списка игр
+      tags:
+        - Games
+      operationId: getAllGames
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Games"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания игры
+      tags:
+        - Games
+      operationId: createGame
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Game"
+      responses:
+         '200': 
+           description: OK
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Game"
+         '400': 
+           description:  Bad Request
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '401':
+           description: Unauthorized
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '403':
+           description: Forbidden
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '404':
+           description: Not found
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"
+         '500':
+           description: Interval Server Error
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Error"  
+          
+  /games/{game_id}:
+    get:
+      summary: Метод получения списка игр
+      tags:
+        - Games
+      operationId: getGameById
+      parameters:
+        - name: game_id
+          in: path
+          required: true
+          description: Идентификатор игры
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+          
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - Games
+      summary: Метод обновления игры по id
+      operationId: gameUpdate
+      parameters: 
+        - name: game_id
+          in: path
+          required: true
+          description: Идентификатор игры
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+        required: true
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    delete:
+      summary: Метод удаления игры по идентификатору
+      tags:
+        - Games
+      operationId: deleteGameById
+      parameters:
+        - name: game_id
+          in: path
+          required: true
+          description: Идентификатор игры
+          schema:
+            type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+      responses:
+        '200': 
+          description: Успешное удаление
+          content:
+            application/json: {}
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+      - "Games"
+      operationId: "gamePatch"
+      parameters:
+        - in: path
+          name: "game_id"
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: "title"
+          schema:
+            type: "string"
+        - in: query
+          name: "description"
+          schema:
+            type: "string"
+        - in: query
+          name: "genre"
+          schema:
+            type: "string"
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        '400': 
+          description:  Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Interval Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Player:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - remember_token
+      properties:
+        player_id:
+          type: string
+          example: 4a27ab2e-ae70-419f-9a26-42a67805d87e
+        name:
+          type: string
+          example: Ivan
+        email:
+          type: string
+          example: somemail@gmail.com
+        password:
+          type: string
+          example: passwordpassword123aa
+        remember_token:
+            type: string
+            example: qAQGYfjg1q
+    Players:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Player"
+    Game:
+      type: object
+      required:
+        - title
+        - description
+        - genre
+      properties:
+        game_id:
+          type: string
+          example: 1b27ab2d-ss70-111f-1b26-55a67805d12d
+        title:
+          type: string
+          example: Fifa
+        description:
+          type: string
+          example: This game about Football
+        genre:
+            type: string
+            example: Sport
+    Games: 
+      type: array
+      items:
+        $ref: "#/components/schemas/Game"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      
+      
+      
